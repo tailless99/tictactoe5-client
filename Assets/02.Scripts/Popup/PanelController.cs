@@ -10,6 +10,9 @@ public class PanelController : MonoBehaviour {
 
     private CanvasGroup _backgroundCanvasGroup;
 
+    // Panel이 Hide될 때 해야할 동작을 처리하는 대리자
+    public delegate void PanelControllerHideDelegate();
+    
     private void Awake() {
         _backgroundCanvasGroup = GetComponent<CanvasGroup>();
     }
@@ -32,16 +35,15 @@ public class PanelController : MonoBehaviour {
     /// <summary>
     /// Panel 숨기기
     /// </summary>
-    public void Hide() {
+    public void Hide(PanelControllerHideDelegate hideDelegate = null) {
         _backgroundCanvasGroup.alpha = 1;
         panelRectTransform.localScale = Vector3.one;
 
         // DoTween을 이용한 Fade
         _backgroundCanvasGroup.DOFade(0, 0.3f).SetEase(Ease.Linear);
-        panelRectTransform.DOScale(0, 0.3f).SetEase(Ease.InBack);
-
-        // 요소 비활성화
-        // 안 보일 뿐, 잔여하고 있으면 상호작용이 안되기 때문에 비활성화
-        gameObject.SetActive(false);
+        panelRectTransform.DOScale(0, 0.3f).SetEase(Ease.InBack).OnComplete(() => {
+            hideDelegate?.Invoke();
+            Destroy(gameObject);
+        });
     }
 }

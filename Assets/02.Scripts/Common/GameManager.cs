@@ -9,6 +9,9 @@ public class GameManager : Singleton<GameManager> {
     // Panel을 띄우기 위한 Canvas 할당
     private Canvas _canvas;
 
+    // Game Logic
+    private GameLogic _gameLogic;
+
     /// <summary>
     /// Maint에서 Game Scene으로 전환시 호출될 메서드
     /// </summary>
@@ -28,15 +31,27 @@ public class GameManager : Singleton<GameManager> {
     /// Confirm Panel을 띄우는 메서드
     /// </summary>
     /// <param name="message"></param>
-    public void OpenConfirmPanel(string message) {
+    public void OpenConfirmPanel(string message, ConfirmPanelController.OnConfirmButtonClicked onConfirmButtonClicked) {
         if(_canvas != null) {
             var confirPanelObject = Instantiate(confirmPanel, _canvas.transform);
-            confirPanelObject.GetComponent<ConfirmPanelController>().Show(message);
+            confirPanelObject.GetComponent<ConfirmPanelController>().Show(message, onConfirmButtonClicked);
         }
     }
 
+    // 씬 로드시 호출되는 함수
     protected override void OnSceneLoad(Scene scene, LoadSceneMode mode) {
-        // TODO : 씬 전환시 처리할 함수
         _canvas = FindFirstObjectByType<Canvas>();
+
+        if(scene.name == "Game") {
+            // Block 초기화
+            var blockContoroller = FindFirstObjectByType<BlockController>();
+            blockContoroller.InitBlocks();
+
+            // GameLogic 생성
+            if(_gameLogic != null) {
+                // TODO : 기존 게임 로직을 소멸
+            }
+            _gameLogic = new GameLogic(blockContoroller, _gameType);
+        }
     }
 }
