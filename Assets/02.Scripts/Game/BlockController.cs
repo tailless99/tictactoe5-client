@@ -24,7 +24,7 @@ public class BlockController : MonoBehaviour
     public void PlaceMarker(Block.MarkerType markerType, int row, int col) {
         // row, col >> index º¯È¯
         var blockIndex = row * Constants.BlockColumnCount + col;
-
+        
         blocks[blockIndex].Setmarker(markerType);
     }
 

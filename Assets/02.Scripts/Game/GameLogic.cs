@@ -1,4 +1,4 @@
-using System.Diagnostics;
+using UnityEngine;
 
 public class GameLogic
 {
@@ -48,7 +48,7 @@ public class GameLogic
     public bool SetNewBoardValue(Constants.PlayerType playerType, int row, int col) {
         if (_board[row, col] != Constants.PlayerType.None) return false;
         
-        if(playerType == Constants.PlayerType.PlayerA) {
+        if (playerType == Constants.PlayerType.PlayerA) {
             _board[row, col] = playerType;
             BlockController.PlaceMarker(Block.MarkerType.O, row, col);
             return true;
@@ -68,8 +68,10 @@ public class GameLogic
         firstPlayerState = null;
         secondPlayerState = null;
 
-        // TODO : 유저에게 Game Over 표시
-        Debug.Write("### Game Over ###");
+        // 유저에게 Game Over 표시
+        GameManager.Instance.OpenConfirmPanel("게임 오버", () => {
+            GameManager.Instance.ChangeToMainScene();
+        });
     }
 
     // 게임의 결과 확인

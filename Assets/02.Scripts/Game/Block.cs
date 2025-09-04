@@ -63,5 +63,6 @@ public class Block : MonoBehaviour
             return;
         }
         Debug.Log($"Selected Block : {_blockIndex}");
+        _onBlockClicked?.Invoke(_blockIndex);
     }
 }

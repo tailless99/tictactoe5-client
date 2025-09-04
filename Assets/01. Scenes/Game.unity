@@ -392,7 +392,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &369679486
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1485,6 +1485,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d98d9d7b802dc7e43bab73ff43bd44ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerATurnPanel: {fileID: 2065252775}
+  playerBTurnPanel: {fileID: 369679485}
 --- !u!114 &1485830089 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6553161601036353941, guid: 94062a3360a58874993bc8def442e3c1, type: 3}
@@ -2099,7 +2101,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2065252776
 RectTransform:
   m_ObjectHideFlags: 0
