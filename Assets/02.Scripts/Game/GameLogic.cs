@@ -22,17 +22,19 @@ public class GameLogic
         // Game Type 초기화
         switch (gameType) {
             case Constants.GameType.SinglePlay:
+                firstPlayerState = new PlayerState(true);
+                secondPlayerState = new AIState();
                 break;
             case Constants.GameType.DualPlay:
                 firstPlayerState = new PlayerState(true);
                 secondPlayerState = new PlayerState(false);
-
-                // 게임 시작
-                SetState(firstPlayerState);
                 break;
             case Constants.GameType.MultiPlay:
                 break;
         }
+        
+        // 게임 시작
+        SetState(firstPlayerState);
     }
 
     // 외부에서 보드를 가져올 수 있도록 반환
