@@ -8,6 +8,7 @@ public class ConfirmPanelController : PanelController {
     private OnConfirmButtonClicked _onConfirmButtonClicked;
 
 
+
     /// <summary>
     /// Confirm Panel을 표시하는 메서드
     /// </summary>
